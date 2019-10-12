@@ -1,0 +1,13 @@
+C:\Users\Park\source\repos\CoinBuccClient\CoinBuccClient\bin\Release\CoinBuccClient.exe.config
+C:\Users\Park\source\repos\CoinBuccClient\CoinBuccClient\bin\Release\CoinBuccClient.exe
+C:\Users\Park\source\repos\CoinBuccClient\CoinBuccClient\bin\Release\CoinBuccClient.pdb
+C:\Users\Park\source\repos\CoinBuccClient\CoinBuccClient\bin\Release\Newtonsoft.Json.dll
+C:\Users\Park\source\repos\CoinBuccClient\CoinBuccClient\bin\Release\Newtonsoft.Json.xml
+C:\Users\Park\source\repos\CoinBuccClient\CoinBuccClient\obj\Release\CoinBuccClient.csprojAssemblyReference.cache
+C:\Users\Park\source\repos\CoinBuccClient\CoinBuccClient\obj\Release\CoinBuccClient.MainForm.resources
+C:\Users\Park\source\repos\CoinBuccClient\CoinBuccClient\obj\Release\CoinBuccClient.Properties.Resources.resources
+C:\Users\Park\source\repos\CoinBuccClient\CoinBuccClient\obj\Release\CoinBuccClient.csproj.GenerateResource.cache
+C:\Users\Park\source\repos\CoinBuccClient\CoinBuccClient\obj\Release\CoinBuccClient.csproj.CoreCompileInputs.cache
+C:\Users\Park\source\repos\CoinBuccClient\CoinBuccClient\obj\Release\CoinBuccClient.csproj.CopyComplete
+C:\Users\Park\source\repos\CoinBuccClient\CoinBuccClient\obj\Release\CoinBuccClient.exe
+C:\Users\Park\source\repos\CoinBuccClient\CoinBuccClient\obj\Release\CoinBuccClient.pdb
