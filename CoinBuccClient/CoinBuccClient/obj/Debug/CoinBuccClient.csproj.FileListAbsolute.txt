@@ -1,0 +1,13 @@
+C:\Users\Park\source\repos\CoinBuccClient\CoinBuccClient\obj\Debug\CoinBuccClient.csprojAssemblyReference.cache
+C:\Users\Park\source\repos\CoinBuccClient\CoinBuccClient\obj\Debug\CoinBuccClient.MainForm.resources
+C:\Users\Park\source\repos\CoinBuccClient\CoinBuccClient\obj\Debug\CoinBuccClient.Properties.Resources.resources
+C:\Users\Park\source\repos\CoinBuccClient\CoinBuccClient\obj\Debug\CoinBuccClient.csproj.GenerateResource.cache
+C:\Users\Park\source\repos\CoinBuccClient\CoinBuccClient\obj\Debug\CoinBuccClient.csproj.CoreCompileInputs.cache
+C:\Users\Park\source\repos\CoinBuccClient\CoinBuccClient\bin\Debug\CoinBuccClient.exe.config
+C:\Users\Park\source\repos\CoinBuccClient\CoinBuccClient\bin\Debug\CoinBuccClient.exe
+C:\Users\Park\source\repos\CoinBuccClient\CoinBuccClient\bin\Debug\CoinBuccClient.pdb
+C:\Users\Park\source\repos\CoinBuccClient\CoinBuccClient\obj\Debug\CoinBuccClient.exe
+C:\Users\Park\source\repos\CoinBuccClient\CoinBuccClient\obj\Debug\CoinBuccClient.pdb
+C:\Users\Park\source\repos\CoinBuccClient\CoinBuccClient\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Park\source\repos\CoinBuccClient\CoinBuccClient\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Park\source\repos\CoinBuccClient\CoinBuccClient\obj\Debug\CoinBuccClient.csproj.CopyComplete
