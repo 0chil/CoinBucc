@@ -1,0 +1,14 @@
+body{
+    background-color: #171717;
+}
+
+.bg-mdark{
+    background-color:#222222;
+}
+
+.f-input{
+    border-bottom-color: #2f77d8;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+}
