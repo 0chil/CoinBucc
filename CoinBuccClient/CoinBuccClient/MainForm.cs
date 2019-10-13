@@ -20,7 +20,7 @@ namespace CoinBuccClient
 {
     public partial class MainForm : Form
     {
-        public string serverAddress = "http://google.com";
+        public string serverAddress = "http://121.140.113.25:8000";
         public Thread mainThread;
         public MainForm()
         {
@@ -135,10 +135,13 @@ namespace CoinBuccClient
              * 로그인 성공 시       OK       리턴(보안 별로 안중요함 이거 악용해봤자임)
              * 실패시 아무거나. empty string도 상관없음
              */
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(serverAddress + "/member/login");
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(serverAddress+"/");
+            string csrf = getCsrfToken();
             request.Method = "POST";
             request.ContentType = "application/x-www-form-urlencoded";
-            string postData = "userID=" + txtId.Text + "&userPW=" + txtPW.Text;
+            request.CookieContainer = new CookieContainer();
+            request.CookieContainer.Add(new Cookie("csrftoken", csrf) { Domain = new Uri(serverAddress).Host});
+            string postData = "csrfmiddlewaretoken=" + csrf + "&username=" + txtId.Text + "&password=" + txtPW.Text;
             byte[] bytes = Encoding.UTF8.GetBytes(postData);
             request.ContentLength = bytes.Length;
 
@@ -151,7 +154,7 @@ namespace CoinBuccClient
             StreamReader reader = new StreamReader(stream);
 
             var result = reader.ReadToEnd();
-            if (result == "OK")
+            if (result.Contains("Dashboard"))
             {
                 mainThread = new Thread(new ThreadStart(mainFunc));
                 mainThread.Start();
@@ -193,9 +196,13 @@ namespace CoinBuccClient
             return returnString;
         }
 
-        private string getStringBetween(string org, string str, string str2)
+        public string getStringBetween(string STR, string FirstString, string LastString)
         {
-            return org.Split(str.ToCharArray())[1].Split(str2.ToCharArray())[0];
+            string FinalString;
+            int Pos1 = STR.IndexOf(FirstString) + FirstString.Length;
+            int Pos2 = STR.IndexOf(LastString);
+            FinalString = STR.Substring(Pos1, Pos2-Pos1);
+            return FinalString;
         }
         private string getCPUID()
         {
@@ -238,6 +245,19 @@ namespace CoinBuccClient
         {
             alertBox.Text = s;
             alertBox.Show();
+        }
+
+        private string getCsrfToken()
+        {
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(serverAddress+"/");
+            request.Method = "GET";
+
+            WebResponse response = request.GetResponse();
+            Stream stream = response.GetResponseStream();
+            StreamReader reader = new StreamReader(stream);
+
+            string result = reader.ReadToEnd();
+            return getStringBetween(result, "csrfmiddlewaretoken\" value=\"", "\">\n            <input type=\"text\"");
         }
     }
 }

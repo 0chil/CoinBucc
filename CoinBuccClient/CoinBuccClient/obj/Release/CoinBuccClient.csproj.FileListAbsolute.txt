@@ -24,3 +24,16 @@ C:\Users\Park\Documents\GitHub\CoinBucc\CoinBuccClient\CoinBuccClient\obj\Releas
 C:\Users\Park\Documents\GitHub\CoinBucc\CoinBuccClient\CoinBuccClient\obj\Release\CoinBuccClient.csproj.CopyComplete
 C:\Users\Park\Documents\GitHub\CoinBucc\CoinBuccClient\CoinBuccClient\obj\Release\CoinBuccClient.exe
 C:\Users\Park\Documents\GitHub\CoinBucc\CoinBuccClient\CoinBuccClient\obj\Release\CoinBuccClient.pdb
+C:\Users\박성철\Documents\GitHub\CoinBucc\CoinBuccClient\CoinBuccClient\bin\Release\CoinBuccClient.exe.config
+C:\Users\박성철\Documents\GitHub\CoinBucc\CoinBuccClient\CoinBuccClient\bin\Release\CoinBuccClient.exe
+C:\Users\박성철\Documents\GitHub\CoinBucc\CoinBuccClient\CoinBuccClient\bin\Release\CoinBuccClient.pdb
+C:\Users\박성철\Documents\GitHub\CoinBucc\CoinBuccClient\CoinBuccClient\bin\Release\Newtonsoft.Json.dll
+C:\Users\박성철\Documents\GitHub\CoinBucc\CoinBuccClient\CoinBuccClient\bin\Release\Newtonsoft.Json.xml
+C:\Users\박성철\Documents\GitHub\CoinBucc\CoinBuccClient\CoinBuccClient\obj\Release\CoinBuccClient.csprojAssemblyReference.cache
+C:\Users\박성철\Documents\GitHub\CoinBucc\CoinBuccClient\CoinBuccClient\obj\Release\CoinBuccClient.MainForm.resources
+C:\Users\박성철\Documents\GitHub\CoinBucc\CoinBuccClient\CoinBuccClient\obj\Release\CoinBuccClient.Properties.Resources.resources
+C:\Users\박성철\Documents\GitHub\CoinBucc\CoinBuccClient\CoinBuccClient\obj\Release\CoinBuccClient.csproj.GenerateResource.cache
+C:\Users\박성철\Documents\GitHub\CoinBucc\CoinBuccClient\CoinBuccClient\obj\Release\CoinBuccClient.csproj.CoreCompileInputs.cache
+C:\Users\박성철\Documents\GitHub\CoinBucc\CoinBuccClient\CoinBuccClient\obj\Release\CoinBuccClient.csproj.CopyComplete
+C:\Users\박성철\Documents\GitHub\CoinBucc\CoinBuccClient\CoinBuccClient\obj\Release\CoinBuccClient.exe
+C:\Users\박성철\Documents\GitHub\CoinBucc\CoinBuccClient\CoinBuccClient\obj\Release\CoinBuccClient.pdb
