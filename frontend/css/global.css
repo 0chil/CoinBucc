@@ -12,3 +12,7 @@ body{
     border-left: none;
     border-right: none;
 }
+
+.card-body{
+    height:25rem;
+}
