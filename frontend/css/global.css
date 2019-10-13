@@ -1,5 +1,6 @@
 body{
     background-color: #171717;
+    margin-top: 90px;
 }
 
 .bg-mdark{
@@ -13,6 +14,35 @@ body{
     border-right: none;
 }
 
-.card-body{
-    height:25rem;
+nav.navbar{
+    height:60px;
+}
+div.navbar-collapse,ul.navbar-nav{
+    height:50px;
+}
+nav .nav-link{
+    color:#2f77d8!important;
+}
+.nav-item.active >.nav-link,.nav-item:hover >.nav-link{
+    border-bottom:#2f77d8 2px solid;
+}
+
+nav .nav-item{
+    align-self: flex-end;
+}
+
+.dropdown-item{
+    color:#2f77d8;
+}
+.dropdown-item:hover{
+    background-color:#2f77d8;
+    color:#ddd;
+}
+
+p{
+    color:#ddd;
+}
+
+h5,h4,h3,h1,h2{
+    color:#2f77d8!important;
 }
