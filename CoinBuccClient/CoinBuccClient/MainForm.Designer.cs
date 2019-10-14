@@ -29,14 +29,14 @@
         private void InitializeComponent()
         {
             this.formSkin1 = new FlatUI.FormSkin();
+            this.flatTextBox1 = new FlatUI.FlatTextBox();
+            this.flatButton2 = new FlatUI.FlatButton();
+            this.flatButton1 = new FlatUI.FlatButton();
             this.alertBox = new FlatUI.FlatAlertBox();
             this.flatClose1 = new FlatUI.FlatClose();
             this.btnLogin = new FlatUI.FlatButton();
             this.txtPW = new FlatUI.FlatTextBox();
             this.txtId = new FlatUI.FlatTextBox();
-            this.flatButton1 = new FlatUI.FlatButton();
-            this.flatButton2 = new FlatUI.FlatButton();
-            this.flatTextBox1 = new FlatUI.FlatTextBox();
             this.formSkin1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -64,6 +64,56 @@
             this.formSkin1.Size = new System.Drawing.Size(326, 466);
             this.formSkin1.TabIndex = 0;
             this.formSkin1.Text = "CoinBuccClient";
+            // 
+            // flatTextBox1
+            // 
+            this.flatTextBox1.BackColor = System.Drawing.Color.Transparent;
+            this.flatTextBox1.FocusOnHover = false;
+            this.flatTextBox1.Location = new System.Drawing.Point(15, 396);
+            this.flatTextBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.flatTextBox1.MaxLength = 32767;
+            this.flatTextBox1.Multiline = false;
+            this.flatTextBox1.Name = "flatTextBox1";
+            this.flatTextBox1.ReadOnly = false;
+            this.flatTextBox1.Size = new System.Drawing.Size(294, 34);
+            this.flatTextBox1.TabIndex = 7;
+            this.flatTextBox1.Text = "http://10.27.12.22:8000";
+            this.flatTextBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.flatTextBox1.TextColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.flatTextBox1.UseSystemPasswordChar = false;
+            this.flatTextBox1.TextChanged += new System.EventHandler(this.flatTextBox1_TextChanged);
+            // 
+            // flatButton2
+            // 
+            this.flatButton2.BackColor = System.Drawing.Color.Transparent;
+            this.flatButton2.BaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(168)))), ((int)(((byte)(109)))));
+            this.flatButton2.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.flatButton2.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.flatButton2.Location = new System.Drawing.Point(15, 308);
+            this.flatButton2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.flatButton2.Name = "flatButton2";
+            this.flatButton2.Rounded = false;
+            this.flatButton2.Size = new System.Drawing.Size(295, 80);
+            this.flatButton2.TabIndex = 6;
+            this.flatButton2.Text = "Jobdone GET TEST";
+            this.flatButton2.TextColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(243)))), ((int)(((byte)(243)))));
+            this.flatButton2.Click += new System.EventHandler(this.flatButton2_Click);
+            // 
+            // flatButton1
+            // 
+            this.flatButton1.BackColor = System.Drawing.Color.Transparent;
+            this.flatButton1.BaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(168)))), ((int)(((byte)(109)))));
+            this.flatButton1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.flatButton1.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.flatButton1.Location = new System.Drawing.Point(14, 220);
+            this.flatButton1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.flatButton1.Name = "flatButton1";
+            this.flatButton1.Rounded = false;
+            this.flatButton1.Size = new System.Drawing.Size(295, 80);
+            this.flatButton1.TabIndex = 5;
+            this.flatButton1.Text = "Heartbeat POST TEST";
+            this.flatButton1.TextColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(243)))), ((int)(((byte)(243)))));
+            this.flatButton1.Click += new System.EventHandler(this.flatButton1_Click);
             // 
             // alertBox
             // 
@@ -141,56 +191,6 @@
             this.txtId.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.txtId.TextColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.txtId.UseSystemPasswordChar = false;
-            // 
-            // flatButton1
-            // 
-            this.flatButton1.BackColor = System.Drawing.Color.Transparent;
-            this.flatButton1.BaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(168)))), ((int)(((byte)(109)))));
-            this.flatButton1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.flatButton1.Font = new System.Drawing.Font("Segoe UI", 12F);
-            this.flatButton1.Location = new System.Drawing.Point(14, 220);
-            this.flatButton1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.flatButton1.Name = "flatButton1";
-            this.flatButton1.Rounded = false;
-            this.flatButton1.Size = new System.Drawing.Size(295, 80);
-            this.flatButton1.TabIndex = 5;
-            this.flatButton1.Text = "Heartbeat POST TEST";
-            this.flatButton1.TextColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(243)))), ((int)(((byte)(243)))));
-            this.flatButton1.Click += new System.EventHandler(this.flatButton1_Click);
-            // 
-            // flatButton2
-            // 
-            this.flatButton2.BackColor = System.Drawing.Color.Transparent;
-            this.flatButton2.BaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(168)))), ((int)(((byte)(109)))));
-            this.flatButton2.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.flatButton2.Font = new System.Drawing.Font("Segoe UI", 12F);
-            this.flatButton2.Location = new System.Drawing.Point(15, 308);
-            this.flatButton2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.flatButton2.Name = "flatButton2";
-            this.flatButton2.Rounded = false;
-            this.flatButton2.Size = new System.Drawing.Size(295, 80);
-            this.flatButton2.TabIndex = 6;
-            this.flatButton2.Text = "Jobdone GET TEST";
-            this.flatButton2.TextColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(243)))), ((int)(((byte)(243)))));
-            this.flatButton2.Click += new System.EventHandler(this.flatButton2_Click);
-            // 
-            // flatTextBox1
-            // 
-            this.flatTextBox1.BackColor = System.Drawing.Color.Transparent;
-            this.flatTextBox1.FocusOnHover = false;
-            this.flatTextBox1.Location = new System.Drawing.Point(15, 396);
-            this.flatTextBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.flatTextBox1.MaxLength = 32767;
-            this.flatTextBox1.Multiline = false;
-            this.flatTextBox1.Name = "flatTextBox1";
-            this.flatTextBox1.ReadOnly = false;
-            this.flatTextBox1.Size = new System.Drawing.Size(294, 34);
-            this.flatTextBox1.TabIndex = 7;
-            this.flatTextBox1.Text = "http://localhost";
-            this.flatTextBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            this.flatTextBox1.TextColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-            this.flatTextBox1.UseSystemPasswordChar = false;
-            this.flatTextBox1.TextChanged += new System.EventHandler(this.flatTextBox1_TextChanged);
             // 
             // MainForm
             // 

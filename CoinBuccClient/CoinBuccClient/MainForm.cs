@@ -77,7 +77,7 @@ namespace CoinBuccClient
             clientInfo.Add("csrfmiddlewaretoken", csrf);
 
             request.Method = "POST";
-            request.ContentType = "application/x-www-form-urlencoded";
+            //request.ContentType = "application/x-www-form-urlencoded";
             string postData = getPostData(clientInfo);
             byte[] bytes = Encoding.UTF8.GetBytes(postData);
             request.ContentLength = bytes.Length;
@@ -137,7 +137,7 @@ namespace CoinBuccClient
             clientInfo.Add("csrfmiddlewaretoken", csrf);
 
             request.Method = "POST";
-            request.ContentType = "application/x-www-form-urlencoded";
+            //request.ContentType = "application/x-www-form-urlencoded";
             string postData = getPostData(clientInfo);
             byte[] bytes = Encoding.UTF8.GetBytes(postData);
             request.ContentLength = bytes.Length;
