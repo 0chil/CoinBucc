@@ -68,7 +68,6 @@ namespace CoinBuccClient
                 {"hashrate","140.1"},
                 {"gpucount","6"},
                 {"gputemp","60|70|70|60|60|60"},
-                {"gputemp","60|70|70|60|60|60"},
             };
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(serverAddress + "/heartbeat/");
             request.Method = "POST";
