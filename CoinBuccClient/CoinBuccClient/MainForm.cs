@@ -20,7 +20,7 @@ namespace CoinBuccClient
 {
     public partial class MainForm : Form
     {
-        public string serverAddress = "http://121.140.113.25:8000";
+        public string serverAddress = "http://localhost";//"http://121.140.113.25:8000";
         public Thread mainThread;
         public MainForm()
         {
@@ -93,10 +93,10 @@ namespace CoinBuccClient
             var result = reader.ReadToEnd();
             return result;
         }
-        
+
         private void doJob(string code)
         {
-            string[] codeArray = code.Split('|');
+            string[] codeArray = code.Contains('|') ? code.Split('|') : new string[1]{code};
             switch (int.Parse(codeArray[0]))
             {
                 case 1:
@@ -118,8 +118,20 @@ namespace CoinBuccClient
         private void mainFunc()
         {
             {
-                string jobCode = Heartbeat();
-                doJob(jobCode);
+                string jobCode = string.Empty;
+                try
+                {
+                    jobCode = Heartbeat();
+                    doJob(jobCode);
+
+                    HttpWebRequest request = (HttpWebRequest)WebRequest.Create(serverAddress + "/done?guid=" + getCPUID());
+                    request.Method = "GET";
+                    WebResponse response = request.GetResponse();
+                }
+                catch(Exception e)
+                {
+                    Console.WriteLine("An error occured while heartbeat. Retry in next 30 seconds");
+                }
             }
             Thread.Sleep(30000); //Do it every 30 seconds (or more)
         }
@@ -135,6 +147,7 @@ namespace CoinBuccClient
              * 로그인 성공 시       OK       리턴(보안 별로 안중요함 이거 악용해봤자임)
              * 실패시 아무거나. empty string도 상관없음
              */
+            
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(serverAddress+"/");
             string csrf = getCsrfToken();
             request.Method = "POST";
@@ -156,6 +169,10 @@ namespace CoinBuccClient
             var result = reader.ReadToEnd();
             if (result.Contains("Dashboard"))
             {
+                success("Login Successful");
+                txtId.Enabled = false;
+                txtPW.Enabled = false;
+                btnLogin.Enabled = false;
                 mainThread = new Thread(new ThreadStart(mainFunc));
                 mainThread.Start();
             }
@@ -243,6 +260,13 @@ namespace CoinBuccClient
 
         private void alert(string s)
         {
+            alertBox.kind = FlatUI.FlatAlertBox._Kind.Error;
+            alertBox.Text = s;
+            alertBox.Show();
+        }
+        private void success(string s)
+        {
+            alertBox.kind = FlatUI.FlatAlertBox._Kind.Success;
             alertBox.Text = s;
             alertBox.Show();
         }
