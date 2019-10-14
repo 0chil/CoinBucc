@@ -58,7 +58,7 @@ namespace CoinBuccClient
              * ex) 3|ETP|MK8T36i5ypcKngR47PS8KTKxwgNX5SQNJC|etp-kor1.topmining.co.kr:8008|worker1             -etp-kor1.topmining.co.kr:8008 라는 채굴 풀 주소에서 ETP 코인을 worker1 이름으로 MK8T36i5ypcKngR47PS8KTKxwgNX5SQNJC 지갑주소에 캠.
              * ex) 4|100|100|400                            -팬 속도 100%, 코어 오버클럭 +100, 메모리 오버클럭 +400
              */
-            var minerState = getMinerState();
+            //var minerState = getMinerState();
             var clientInfo = new Dictionary<string, string>
             {
                 {"GUID",getCPUID()},
@@ -70,6 +70,12 @@ namespace CoinBuccClient
                 {"gputemp","60|70|70|60|60|60"},
             };
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(serverAddress + "/heartbeat/");
+
+            string csrf = getCsrfToken();
+            request.CookieContainer = new CookieContainer();
+            request.CookieContainer.Add(new Cookie("csrftoken", csrf) { Domain = new Uri(serverAddress).Host });
+            clientInfo.Add("csrfmiddlewaretoken", csrf);
+
             request.Method = "POST";
             request.ContentType = "application/x-www-form-urlencoded";
             string postData = getPostData(clientInfo);
@@ -124,6 +130,12 @@ namespace CoinBuccClient
                 {"gputemp",minerState["gputemp"]},
             };
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(serverAddress + "/heartbeat/");
+
+            string csrf = getCsrfToken();
+            request.CookieContainer = new CookieContainer();
+            request.CookieContainer.Add(new Cookie("csrftoken", csrf) { Domain = new Uri(serverAddress).Host });
+            clientInfo.Add("csrfmiddlewaretoken", csrf);
+
             request.Method = "POST";
             request.ContentType = "application/x-www-form-urlencoded";
             string postData = getPostData(clientInfo);
@@ -195,13 +207,16 @@ namespace CoinBuccClient
              * 로그인 성공 시       OK       리턴(보안 별로 안중요함 이거 악용해봤자임)
              * 실패시 아무거나. empty string도 상관없음
              */
-            
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(serverAddress+"/");
+
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(serverAddress + "/");
+
             string csrf = getCsrfToken();
+            request.CookieContainer = new CookieContainer();
+            request.CookieContainer.Add(new Cookie("csrftoken", csrf) { Domain = new Uri(serverAddress).Host });
+
             request.Method = "POST";
             request.ContentType = "application/x-www-form-urlencoded";
-            request.CookieContainer = new CookieContainer();
-            request.CookieContainer.Add(new Cookie("csrftoken", csrf) { Domain = new Uri(serverAddress).Host});
+            
             string postData = "csrfmiddlewaretoken=" + csrf + "&username=" + txtId.Text + "&password=" + txtPW.Text;
             byte[] bytes = Encoding.UTF8.GetBytes(postData);
             request.ContentLength = bytes.Length;
@@ -220,9 +235,9 @@ namespace CoinBuccClient
                 success("Login Successful");
                 txtId.Enabled = false;
                 txtPW.Enabled = false;
-                btnLogin.Enabled = false;
+                btnLogin.Enabled = false;/*
                 mainThread = new Thread(new ThreadStart(mainFunc));
-                mainThread.Start();
+                mainThread.Start();*/
             }
             else
             {
