@@ -70,7 +70,7 @@ namespace CoinBuccClient
                 {"gputemp","60|70|70|60|60|60"},
                 {"gputemp","60|70|70|60|60|60"},
             };
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(serverAddress + "/heartbeat");
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(serverAddress + "/heartbeat/");
             request.Method = "POST";
             request.ContentType = "application/x-www-form-urlencoded";
             string postData = getPostData(clientInfo);
@@ -91,7 +91,7 @@ namespace CoinBuccClient
         
         private void Test_Jobdone()
         {
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(serverAddress + "/done?guid=" + getCPUID());
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(serverAddress + "/done/?guid=" + getCPUID());
             request.Method = "GET";
             WebResponse response = request.GetResponse();
         }
@@ -124,7 +124,7 @@ namespace CoinBuccClient
                 {"gpucount",minerState["gpucount"] },
                 {"gputemp",minerState["gputemp"]},
             };
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(serverAddress + "/heartbeat");
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(serverAddress + "/heartbeat/");
             request.Method = "POST";
             request.ContentType = "application/x-www-form-urlencoded";
             string postData = getPostData(clientInfo);
@@ -173,7 +173,7 @@ namespace CoinBuccClient
                     jobCode = Heartbeat();
                     doJob(jobCode);
 
-                    HttpWebRequest request = (HttpWebRequest)WebRequest.Create(serverAddress + "/done?guid=" + getCPUID());
+                    HttpWebRequest request = (HttpWebRequest)WebRequest.Create(serverAddress + "/done/?guid=" + getCPUID());
                     request.Method = "GET";
                     WebResponse response = request.GetResponse();
                 }
