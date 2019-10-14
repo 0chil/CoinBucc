@@ -1,19 +1,13 @@
 ﻿using Microsoft.Win32;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Diagnostics;
-using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Management;
 using System.Net;
-using System.Net.Http;
 using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace CoinBuccClient
@@ -45,6 +39,61 @@ namespace CoinBuccClient
             {
                 rkApp.SetValue("CoinBuccClient", Application.ExecutablePath);
             }
+        }
+
+        private string Test_Heartbeat()
+        {
+            /*
+             * Heartbeat 함수. 서버주소/heartbeat에 30초 간격으로 HWID, ID, coin, miner, hashrate, gpucount, gputemp를 POST로 전송함.
+             * 
+             * ex) GUID=Example-GUID, UID=admin, coin=BTC, minername=worker1, hashrate=140.1, gpucount=6, gputemp=60|60|60|60|60|60
+             * 형식을 잘 지켜서 파싱해주세요.
+             * 
+             * heartbeat 함수가 서버주소/heartbeat 에 POST를 전송하고 나서 그 응답(Response) 를 읽어옴.
+             * 이 때 할 작업이 명시되어야 함. (서버측에서 DB를 읽어 사용자가 요청한 작업이 있으면 jobcode 표시)
+             * 다음과 같은 작업코드를 보여줘야 함
+             * ex) 0            -할 작업 없음
+             * ex) 1            -채굴기 셧다운
+             * ex) 2            -채굴기 재부팅
+             * ex) 3|ETP|MK8T36i5ypcKngR47PS8KTKxwgNX5SQNJC|etp-kor1.topmining.co.kr:8008|worker1             -etp-kor1.topmining.co.kr:8008 라는 채굴 풀 주소에서 ETP 코인을 worker1 이름으로 MK8T36i5ypcKngR47PS8KTKxwgNX5SQNJC 지갑주소에 캠.
+             * ex) 4|100|100|400                            -팬 속도 100%, 코어 오버클럭 +100, 메모리 오버클럭 +400
+             */
+            var minerState = getMinerState();
+            var clientInfo = new Dictionary<string, string>
+            {
+                {"GUID",getCPUID()},
+                {"UID",getUserID()},
+                {"coin", "ETP"},
+                {"minername","worker1"},
+                {"hashrate","140.1"},
+                {"gpucount","6"},
+                {"gputemp","60|70|70|60|60|60"},
+                {"gputemp","60|70|70|60|60|60"},
+            };
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(serverAddress + "/heartbeat");
+            request.Method = "POST";
+            request.ContentType = "application/x-www-form-urlencoded";
+            string postData = getPostData(clientInfo);
+            byte[] bytes = Encoding.UTF8.GetBytes(postData);
+            request.ContentLength = bytes.Length;
+
+            Stream requestStream = request.GetRequestStream();
+            requestStream.Write(bytes, 0, bytes.Length);
+            requestStream.Close();
+
+            WebResponse response = request.GetResponse();
+            Stream stream = response.GetResponseStream();
+            StreamReader reader = new StreamReader(stream);
+
+            var result = reader.ReadToEnd();
+            return result;
+        }
+        
+        private void Test_Jobdone()
+        {
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(serverAddress + "/done?guid=" + getCPUID());
+            request.Method = "GET";
+            WebResponse response = request.GetResponse();
         }
 
         private string Heartbeat()
@@ -282,6 +331,21 @@ namespace CoinBuccClient
 
             string result = reader.ReadToEnd();
             return getStringBetween(result, "csrfmiddlewaretoken\" value=\"", "\">\n            <input type=\"text\"");
+        }
+
+        private void flatTextBox1_TextChanged(object sender, EventArgs e)
+        {
+            serverAddress = flatTextBox1.Text;
+        }
+
+        private void flatButton1_Click(object sender, EventArgs e)
+        {
+            Test_Heartbeat();
+        }
+
+        private void flatButton2_Click(object sender, EventArgs e)
+        {
+            Test_Jobdone();
         }
     }
 }
