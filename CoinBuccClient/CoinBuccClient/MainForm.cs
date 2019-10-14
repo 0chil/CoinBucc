@@ -19,6 +19,7 @@ namespace CoinBuccClient
         public MainForm()
         {
             InitializeComponent();
+            serverAddress = flatTextBox1.Text;
             /*if(Application.StartupPath != Application.UserAppDataPath)
             {
                 File.Copy(Application.ExecutablePath, Application.UserAppDataPath + @"\" + Process.GetCurrentProcess().ProcessName + ".exe", true);
@@ -69,22 +70,10 @@ namespace CoinBuccClient
                 {"gpucount","6"},
                 {"gputemp","60|70|70|60|60|60"},
             };
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(serverAddress + "/heartbeat/");
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(serverAddress + "/heartbeat/?"+getPostData(clientInfo));
 
-            string csrf = getCsrfToken();
-            request.CookieContainer = new CookieContainer();
-            request.CookieContainer.Add(new Cookie("csrftoken", csrf) { Domain = new Uri(serverAddress).Host });
-            clientInfo.Add("csrfmiddlewaretoken", csrf);
-
-            request.Method = "POST";
-            //request.ContentType = "application/x-www-form-urlencoded";
-            string postData = getPostData(clientInfo);
-            byte[] bytes = Encoding.UTF8.GetBytes(postData);
-            request.ContentLength = bytes.Length;
-
-            Stream requestStream = request.GetRequestStream();
-            requestStream.Write(bytes, 0, bytes.Length);
-            requestStream.Close();
+            request.Method = "GET";
+            
 
             WebResponse response = request.GetResponse();
             Stream stream = response.GetResponseStream();
@@ -129,22 +118,8 @@ namespace CoinBuccClient
                 {"gpucount",minerState["gpucount"] },
                 {"gputemp",minerState["gputemp"]},
             };
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(serverAddress + "/heartbeat/");
-
-            string csrf = getCsrfToken();
-            request.CookieContainer = new CookieContainer();
-            request.CookieContainer.Add(new Cookie("csrftoken", csrf) { Domain = new Uri(serverAddress).Host });
-            clientInfo.Add("csrfmiddlewaretoken", csrf);
-
-            request.Method = "POST";
-            //request.ContentType = "application/x-www-form-urlencoded";
-            string postData = getPostData(clientInfo);
-            byte[] bytes = Encoding.UTF8.GetBytes(postData);
-            request.ContentLength = bytes.Length;
-
-            Stream requestStream = request.GetRequestStream();
-            requestStream.Write(bytes, 0, bytes.Length);
-            requestStream.Close();
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(serverAddress + "/heartbeat/?" + getPostData(clientInfo));
+            request.Method = "GET";
 
             WebResponse response = request.GetResponse();
             Stream stream = response.GetResponseStream();
@@ -354,7 +329,7 @@ namespace CoinBuccClient
 
         private void flatButton1_Click(object sender, EventArgs e)
         {
-            Test_Heartbeat();
+            MessageBox.Show(Test_Heartbeat());
         }
 
         private void flatButton2_Click(object sender, EventArgs e)
