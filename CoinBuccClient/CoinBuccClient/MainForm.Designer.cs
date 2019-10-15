@@ -59,9 +59,8 @@
             this.formSkin1.HeaderColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(47)))), ((int)(((byte)(49)))));
             this.formSkin1.HeaderMaximize = false;
             this.formSkin1.Location = new System.Drawing.Point(0, 0);
-            this.formSkin1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.formSkin1.Name = "formSkin1";
-            this.formSkin1.Size = new System.Drawing.Size(326, 466);
+            this.formSkin1.Size = new System.Drawing.Size(285, 190);
             this.formSkin1.TabIndex = 0;
             this.formSkin1.Text = "CoinBuccClient";
             // 
@@ -69,15 +68,14 @@
             // 
             this.flatTextBox1.BackColor = System.Drawing.Color.Transparent;
             this.flatTextBox1.FocusOnHover = false;
-            this.flatTextBox1.Location = new System.Drawing.Point(15, 396);
-            this.flatTextBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.flatTextBox1.Location = new System.Drawing.Point(13, 331);
             this.flatTextBox1.MaxLength = 32767;
             this.flatTextBox1.Multiline = false;
             this.flatTextBox1.Name = "flatTextBox1";
             this.flatTextBox1.ReadOnly = false;
-            this.flatTextBox1.Size = new System.Drawing.Size(294, 34);
+            this.flatTextBox1.Size = new System.Drawing.Size(257, 29);
             this.flatTextBox1.TabIndex = 7;
-            this.flatTextBox1.Text = "http://10.27.12.22:8000";
+            this.flatTextBox1.Text = "http://coinbucc.cf";
             this.flatTextBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.flatTextBox1.TextColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.flatTextBox1.UseSystemPasswordChar = false;
@@ -89,11 +87,10 @@
             this.flatButton2.BaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(168)))), ((int)(((byte)(109)))));
             this.flatButton2.Cursor = System.Windows.Forms.Cursors.Hand;
             this.flatButton2.Font = new System.Drawing.Font("Segoe UI", 12F);
-            this.flatButton2.Location = new System.Drawing.Point(15, 308);
-            this.flatButton2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.flatButton2.Location = new System.Drawing.Point(13, 260);
             this.flatButton2.Name = "flatButton2";
             this.flatButton2.Rounded = false;
-            this.flatButton2.Size = new System.Drawing.Size(295, 80);
+            this.flatButton2.Size = new System.Drawing.Size(258, 64);
             this.flatButton2.TabIndex = 6;
             this.flatButton2.Text = "Jobdone GET TEST";
             this.flatButton2.TextColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(243)))), ((int)(((byte)(243)))));
@@ -105,11 +102,10 @@
             this.flatButton1.BaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(168)))), ((int)(((byte)(109)))));
             this.flatButton1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.flatButton1.Font = new System.Drawing.Font("Segoe UI", 12F);
-            this.flatButton1.Location = new System.Drawing.Point(14, 220);
-            this.flatButton1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.flatButton1.Location = new System.Drawing.Point(12, 190);
             this.flatButton1.Name = "flatButton1";
             this.flatButton1.Rounded = false;
-            this.flatButton1.Size = new System.Drawing.Size(295, 80);
+            this.flatButton1.Size = new System.Drawing.Size(258, 64);
             this.flatButton1.TabIndex = 5;
             this.flatButton1.Text = "Heartbeat POST TEST";
             this.flatButton1.TextColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(243)))), ((int)(((byte)(243)))));
@@ -121,10 +117,9 @@
             this.alertBox.Cursor = System.Windows.Forms.Cursors.Hand;
             this.alertBox.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.alertBox.kind = FlatUI.FlatAlertBox._Kind.Error;
-            this.alertBox.Location = new System.Drawing.Point(14, 170);
-            this.alertBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.alertBox.Location = new System.Drawing.Point(12, 136);
             this.alertBox.Name = "alertBox";
-            this.alertBox.Size = new System.Drawing.Size(296, 42);
+            this.alertBox.Size = new System.Drawing.Size(259, 42);
             this.alertBox.TabIndex = 4;
             this.alertBox.Text = "flatAlertBox1";
             this.alertBox.Visible = false;
@@ -135,8 +130,7 @@
             this.flatClose1.BackColor = System.Drawing.Color.White;
             this.flatClose1.BaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(168)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))));
             this.flatClose1.Font = new System.Drawing.Font("Marlett", 10F);
-            this.flatClose1.Location = new System.Drawing.Point(291, 16);
-            this.flatClose1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.flatClose1.Location = new System.Drawing.Point(255, 13);
             this.flatClose1.Name = "flatClose1";
             this.flatClose1.Size = new System.Drawing.Size(18, 18);
             this.flatClose1.TabIndex = 3;
@@ -149,11 +143,10 @@
             this.btnLogin.BaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(168)))), ((int)(((byte)(109)))));
             this.btnLogin.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnLogin.Font = new System.Drawing.Font("Segoe UI", 12F);
-            this.btnLogin.Location = new System.Drawing.Point(214, 82);
-            this.btnLogin.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnLogin.Location = new System.Drawing.Point(187, 66);
             this.btnLogin.Name = "btnLogin";
             this.btnLogin.Rounded = false;
-            this.btnLogin.Size = new System.Drawing.Size(96, 80);
+            this.btnLogin.Size = new System.Drawing.Size(84, 64);
             this.btnLogin.TabIndex = 2;
             this.btnLogin.Text = "Login";
             this.btnLogin.TextColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(243)))), ((int)(((byte)(243)))));
@@ -163,13 +156,12 @@
             // 
             this.txtPW.BackColor = System.Drawing.Color.Transparent;
             this.txtPW.FocusOnHover = false;
-            this.txtPW.Location = new System.Drawing.Point(14, 126);
-            this.txtPW.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtPW.Location = new System.Drawing.Point(12, 101);
             this.txtPW.MaxLength = 32767;
             this.txtPW.Multiline = false;
             this.txtPW.Name = "txtPW";
             this.txtPW.ReadOnly = false;
-            this.txtPW.Size = new System.Drawing.Size(192, 34);
+            this.txtPW.Size = new System.Drawing.Size(168, 29);
             this.txtPW.TabIndex = 1;
             this.txtPW.Tag = "";
             this.txtPW.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
@@ -180,13 +172,12 @@
             // 
             this.txtId.BackColor = System.Drawing.Color.Transparent;
             this.txtId.FocusOnHover = false;
-            this.txtId.Location = new System.Drawing.Point(14, 82);
-            this.txtId.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtId.Location = new System.Drawing.Point(12, 66);
             this.txtId.MaxLength = 32767;
             this.txtId.Multiline = false;
             this.txtId.Name = "txtId";
             this.txtId.ReadOnly = false;
-            this.txtId.Size = new System.Drawing.Size(192, 34);
+            this.txtId.Size = new System.Drawing.Size(168, 29);
             this.txtId.TabIndex = 0;
             this.txtId.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.txtId.TextColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
@@ -194,12 +185,11 @@
             // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(326, 466);
+            this.ClientSize = new System.Drawing.Size(285, 190);
             this.Controls.Add(this.formSkin1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "CoinBuccClient";
