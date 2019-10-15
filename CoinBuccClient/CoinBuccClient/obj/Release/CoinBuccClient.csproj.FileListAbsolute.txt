@@ -37,3 +37,6 @@ C:\Users\박성철\Documents\GitHub\CoinBucc\CoinBuccClient\CoinBuccClient\obj\R
 C:\Users\박성철\Documents\GitHub\CoinBucc\CoinBuccClient\CoinBuccClient\obj\Release\CoinBuccClient.csproj.CopyComplete
 C:\Users\박성철\Documents\GitHub\CoinBucc\CoinBuccClient\CoinBuccClient\obj\Release\CoinBuccClient.exe
 C:\Users\박성철\Documents\GitHub\CoinBucc\CoinBuccClient\CoinBuccClient\obj\Release\CoinBuccClient.pdb
+C:\Users\Park\Documents\GitHub\CoinBucc\CoinBuccClient\CoinBuccClient\bin\Release\HtmlAgilityPack.dll
+C:\Users\Park\Documents\GitHub\CoinBucc\CoinBuccClient\CoinBuccClient\bin\Release\HtmlAgilityPack.pdb
+C:\Users\Park\Documents\GitHub\CoinBucc\CoinBuccClient\CoinBuccClient\bin\Release\HtmlAgilityPack.xml
