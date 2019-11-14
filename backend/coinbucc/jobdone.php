@@ -1,4 +1,4 @@
-<?
+<?php
 include("member/connect.php");
 $guid=$_GET['guid'];
 

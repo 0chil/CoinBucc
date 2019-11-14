@@ -1,4 +1,4 @@
-<?
+<?php
 include_once("member/settings.php");
 
 
@@ -6,9 +6,10 @@ $query = "SELECT sum(hashrate) as totalhash FROM miners WHERE uid='$_SESSION[use
 $result = mysqli_query($con, $query);
 $totalhash=mysqli_fetch_assoc($result)['totalhash'];
 
-$query = "SELECT count(*) as minercnt FROM miners WHERE uid='$_SESSION[user_id]'";
+$query = "SELECT sum(gpuelec) as totalelec FROM miners WHERE uid='$_SESSION[user_id]'";
 $result = mysqli_query($con, $query);
-$minercnt=mysqli_fetch_assoc($result)['minercnt'];
+$totalelec=mysqli_fetch_assoc($result)['totalelec'];
+
 ?>
 <!doctype html>
 <html class="h-100">
@@ -20,7 +21,7 @@ $minercnt=mysqli_fetch_assoc($result)['minercnt'];
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="css/global.css">
   </head>
-  <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-mdark text-white">
+  <nav class="shadow navbar fixed-top navbar-expand-lg navbar-light bg-mdark text-white">
     <div class="container">
       <a href="/"><img class="img-fluid" style="height:40px;" src="img/COINBUCC-0.5.png"></a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -53,64 +54,64 @@ $minercnt=mysqli_fetch_assoc($result)['minercnt'];
 
   <body class="h-100">
     <div class="row justify-content-center mx-4 mt-5">
-      <a class="align-self-center mr-2"><img src="img/left.png"></a>
-      <div class="card bg-mdark col-2 mx-1">
+      <a class="align-self-center mr-2 d-none d-md-block"><img src="img/left.png"></a>
+      <div class="shadow card bg-mdark col-8 col-lg-2 mx-1">
         <div class="card-body text-center">
           <p>Miners</p>
           <h3><?=$minercnt?></h3>
         </div>
       </div>
-      <div class="card bg-mdark col-2 mx-1">
+      <div class="shadow card bg-mdark col-8 col-lg-2 mx-1">
         <div class="card-body text-center">
           <p>Value per BTC</p>
           <h3>$8003.4</h3>
         </div>
       </div>
-      <div class="card bg-mdark col-2 mx-1">
+      <div class="shadow card bg-mdark col-8 col-lg-2 mx-1">
         <div class="card-body text-center">
           <p>Add Content</p>
           <img class="img-fluid" style="height:40px;" src="img/+.png">
           <!-- 백엔드에서 건드릴 필요 없습니다~ -->
         </div>
       </div>
-      <a class="align-self-center ml-2"><img src="img/right.png"></a>
+      <a class="align-self-center ml-2 d-none d-md-block"><img src="img/right.png"></a>
     </div>
     <div class="container-fluid">
       <div class="row justify-content-center">
-        <div class="card bg-mdark col-4 ml-2 mt-5 text-center">
+        <div class="shadow card bg-mdark col-10 col-lg-4 ml-2 mt-5 text-center">
           <p class="mt-2">WORKING CONDITION</p>
           <div class="card-body text-center align-items-center">
-            <h5><?=$minercnt?> of <?=$minercnt?></h5>
-            <h5>100%</h5>
+            <h5><?=$workingminercnt?> of <?=$minercnt?></h5>
+            <h5><?=$workingminercnt/$minercnt*100?>%</h5>
             <p>WORKING</p>
           </div>
         </div>
-        <div class="card bg-mdark col-4 ml-2 mt-5 text-center">
+        <div class="shadow card bg-mdark col-10 col-lg-4 ml-2 mt-5 text-center">
           <p class="mt-2">ELECTRONIC CONSUMPTION</p>
           <div class="card-body text-center align-items-center">
-            <h1>504.1 w</h1>
+            <h1><?=$totalelec?> W</h1>
           </div>
         </div>
       </div>
 
       <div class="row justify-content-center">
-        <div class="card bg-mdark col-4 ml-2 my-5 text-center">
+        <div class="shadow card bg-mdark col-10 col-lg-4 ml-2 my-5 text-center">
           <p class="mt-2">TOTAL HASHRATE</p>
           <div class="card-body text-center align-items-center">
               <div class="row"><h1 class="col"><?=$totalhash?> Mh/s</h1></div>
           </div>
         </div>
-        <div class="card bg-mdark col-4 ml-2 my-5 text-center">
+        <div class="shadow card bg-mdark col-10 col-lg-4 ml-2 my-5 text-center">
           <p class="mt-2">TOP MINERs</p>
           <div class="card-body text-center align-items-center">
             <ul class="list-group">
-              <?
+              <?php
               $query = "SELECT * FROM miners WHERE uid='$_SESSION[user_id]'";
               $result = mysqli_query($con, $query);
               for($i=0;$row=mysqli_fetch_array($result),$i<3;$i++){
               ?>
-              <li class="list-group-item bg-dark text-white text-center"><?=$row['minername']?> - <?=$row['hashrate']?> Mh/s</li>
-              <?
+              <li class="list-group-item bg-ddark text-white text-center"><?=$row['minername']?> - <?=$row['hashrate']?> Mh/s</li>
+              <?php
               }
               ?>
             </ul>

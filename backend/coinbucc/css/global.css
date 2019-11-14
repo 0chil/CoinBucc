@@ -50,3 +50,7 @@ h5,h4,h3,h1,h2{
 input[type=text]:focus,input[type=password]:focus {
     background-color:#222222;
 }
+
+.bg-ddark{
+    background-color: #171717;
+}

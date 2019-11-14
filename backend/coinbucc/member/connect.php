@@ -2,7 +2,7 @@
 
 $db_host = "localhost";
 $db_user = "root";
-$db_password = "07302335ab";
+$db_password = "asus0730";
 $db_name = "coinbucc";
 
 

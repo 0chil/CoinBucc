@@ -1,4 +1,4 @@
-<?
+<?php
 include ("connect.php");
 $user_id=$_POST['user_id'];
 $password=$_POST['password'];

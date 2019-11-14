@@ -1,6 +1,6 @@
-<?
+<?php
 session_start();
-if($_SESSION['user_id']!=null) echo "<script>location.href='/dashboard.php'</script>";
+if($_SESSION['user_id']!=null) echo "<script>location.href='dashboard.php'</script>";
 ?>
 <!doctype html>
 <html class="h-100">
@@ -15,14 +15,14 @@ if($_SESSION['user_id']!=null) echo "<script>location.href='/dashboard.php'</scr
   </head>
   <body class="h-100">
     <div class="row align-items-center mw-100 mh-100 h-100 mx-0" style=>
-      <div class="card bg-mdark col-11 col-md-4 col-xl-3 mx-auto">
+      <div class="shadow card bg-mdark col-11 col-md-4 col-xl-3 mx-auto">
         <div class="card-body mx-5 mt-5 text-center">
           <img src="img/COINBUCC.png" class="img-fluid mb-5">
           <form action="member/login_check.php" method="POST">
             <input type="text" class="text-primary bg-mdark form-control f-input mb-3" placeholder="ID" aria-label="ID" aria-describedby="ID" name="user_id">
             <input type="password" class="text-primary bg-mdark form-control f-input mb-4" placeholder="Password" aria-label="Password" aria-describedby="Password" name="password">
-            <input type="submit" class="btn btn-outline-primary btn-block mb-3" value="Login">
-            <a href="/register/" class="text-primary mb-5">Sign Up</a>
+            <input type="submit" class="shadow btn btn-outline-primary btn-block mb-3" value="Login">
+            <a href="member/register.php" class="text-primary mb-5">Sign Up</a>
           </form>
         </div>
       </div>

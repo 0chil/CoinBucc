@@ -1,5 +1,5 @@
-<? 
-header('Location: http://coinbucc.cf/login.php');
+<?php
+header('Location: login.php');
 
 exit;
 ?>

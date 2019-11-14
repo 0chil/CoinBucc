@@ -1,27 +1,30 @@
 ﻿using Microsoft.Win32;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
 using System.Diagnostics;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Management;
 using System.Net;
+using System.Net.Http;
 using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
-using HtmlAgilityPack;
 
 namespace CoinBuccClient
 {
     public partial class MainForm : Form
     {
-        public string serverAddress = "http://localhost";//"http://121.140.113.25:8000";
+        public string serverAddress = "http://google.com";
         public Thread mainThread;
         public MainForm()
         {
             InitializeComponent();
-            serverAddress = flatTextBox1.Text;
-            Text = getCPUID();
             /*if(Application.StartupPath != Application.UserAppDataPath)
             {
                 File.Copy(Application.ExecutablePath, Application.UserAppDataPath + @"\" + Process.GetCurrentProcess().ProcessName + ".exe", true);
@@ -44,45 +47,6 @@ namespace CoinBuccClient
             }
         }
 
-        private string Test_Heartbeat()
-        {
-            var clientInfo = new Dictionary<string, string>
-            {
-                {"guid",getCPUID()},
-                {"uid",getUserID()},
-                {"mining","no"},
-                {"coin", "ETP"},
-                {"minername","worker1"},
-                {"hashrate","140.1"},
-                {"gpucount","6"},
-                {"gputemp","60|70|70|60|60|60"},
-            };
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(serverAddress + "/heartbeat.php");
-            request.Method = "POST";
-            request.ContentType = "application/x-www-form-urlencoded";
-
-            byte[] bytes = Encoding.UTF8.GetBytes(getPostData(clientInfo));
-            request.ContentLength = bytes.Length;
-
-            Stream requestStream = request.GetRequestStream();
-            requestStream.Write(bytes, 0, bytes.Length);
-            requestStream.Close();
-
-            WebResponse response = request.GetResponse();
-            Stream stream = response.GetResponseStream();
-            StreamReader reader = new StreamReader(stream);
-
-            var result = reader.ReadToEnd();
-            return result;
-        }
-        
-        private void Test_Jobdone()
-        {
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(serverAddress + "/jobdone.php?guid=" + getCPUID());
-            request.Method = "GET";
-            request.GetResponse();
-        }
-
         private string Heartbeat()
         {
             /*
@@ -100,36 +64,22 @@ namespace CoinBuccClient
              * ex) 3|ETP|MK8T36i5ypcKngR47PS8KTKxwgNX5SQNJC|etp-kor1.topmining.co.kr:8008|worker1             -etp-kor1.topmining.co.kr:8008 라는 채굴 풀 주소에서 ETP 코인을 worker1 이름으로 MK8T36i5ypcKngR47PS8KTKxwgNX5SQNJC 지갑주소에 캠.
              * ex) 4|100|100|400                            -팬 속도 100%, 코어 오버클럭 +100, 메모리 오버클럭 +400
              */
-            Dictionary<string, string> minerState = new Dictionary<string, string>();
-            Dictionary<string, string> clientInfo = new Dictionary<string, string>();
-            string result;
-            minerState = getMinerState();
-            if (minerState.Count != 0) {
-                clientInfo = new Dictionary<string, string>
-                {
-                    {"guid",getCPUID()},
-                    {"uid",getUserID()},
-                    {"coin", minerState["coin"]},
-                    {"minername",minerState["minername"] },
-                    {"hashrate",minerState["hashrate"] },
-                    {"gpucount",minerState["gpucount"] },
-                    {"gputemp",minerState["gputemp"]},
-                    {"mining","yes"}
-                };
-            }
-            else {
-                clientInfo = new Dictionary<string, string>
-                {
-                    {"guid",getCPUID()},
-                    {"uid",getUserID()},
-                    {"mining","no"}
-                };
-            }
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(serverAddress + "/heartbeat.php");
+            var minerState = getMinerState();
+            var clientInfo = new Dictionary<string, string>
+            {
+                {"GUID",getCPUID()},
+                {"UID",getUserID()},
+                {"coin", minerState["coin"]},
+                {"minername",minerState["minername"] },
+                {"hashrate",minerState["hashrate"] },
+                {"gpucount",minerState["gpucount"] },
+                {"gputemp",minerState["gputemp"]},
+            };
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(serverAddress + "/heartbeat");
             request.Method = "POST";
             request.ContentType = "application/x-www-form-urlencoded";
-
-            byte[] bytes = Encoding.UTF8.GetBytes(getPostData(clientInfo));
+            string postData = getPostData(clientInfo);
+            byte[] bytes = Encoding.UTF8.GetBytes(postData);
             request.ContentLength = bytes.Length;
 
             Stream requestStream = request.GetRequestStream();
@@ -140,20 +90,20 @@ namespace CoinBuccClient
             Stream stream = response.GetResponseStream();
             StreamReader reader = new StreamReader(stream);
 
-            result = reader.ReadToEnd();
+            var result = reader.ReadToEnd();
             return result;
         }
-
+        
         private void doJob(string code)
         {
-            string[] codeArray = code.Contains('|') ? code.Split('|') : new string[1]{code};
+            string[] codeArray = code.Split('|');
             switch (int.Parse(codeArray[0]))
             {
                 case 1:
-                    Process.Start("shutdown -s -f -t 5");
+                    Process.Start("shutdown -s -f -t 0");
                     break;
                 case 2:
-                    Process.Start("shutdown -r -f -t 5");
+                    Process.Start("shutdown -r -f -t 0");
                     break;
                 case 3:
                     runMiner(codeArray[3],codeArray[2],codeArray[4]);
@@ -163,37 +113,15 @@ namespace CoinBuccClient
                 default:
                     return;
             }
-            if (int.Parse(codeArray[0]) > 0)
-            {
-                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(serverAddress + "/jobdone.php?guid=" + getCPUID());
-                request.Method = "GET";
-                request.GetResponse();
-            }
         }
 
         private void mainFunc()
         {
-            while(true)
             {
-                string jobCode;
-                jobCode = Heartbeat();
+                string jobCode = Heartbeat();
                 doJob(jobCode);
-
-                
-
-                /*
-                try
-                {
-                    jobCode = Heartbeat();
-                    doJob(jobCode);
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine("An error occured while heartbeat. Retry in next 5 seconds. \nThis could happen because of miner down.");
-                }*/
-                
-                Thread.Sleep(5000); //Do it every 5 seconds (or more)
             }
+            Thread.Sleep(30000); //Do it every 30 seconds (or more)
         }
 
         
@@ -207,13 +135,10 @@ namespace CoinBuccClient
              * 로그인 성공 시       OK       리턴(보안 별로 안중요함 이거 악용해봤자임)
              * 실패시 아무거나. empty string도 상관없음
              */
-
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(serverAddress + "/member/login_check.php");
-
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(serverAddress + "/member/login");
             request.Method = "POST";
             request.ContentType = "application/x-www-form-urlencoded";
-            
-            string postData = "user_id=" + txtId.Text + "&password=" + txtPW.Text;
+            string postData = "userID=" + txtId.Text + "&userPW=" + txtPW.Text;
             byte[] bytes = Encoding.UTF8.GetBytes(postData);
             request.ContentLength = bytes.Length;
 
@@ -226,14 +151,8 @@ namespace CoinBuccClient
             StreamReader reader = new StreamReader(stream);
 
             var result = reader.ReadToEnd();
-            Debug.WriteLine(result);
-            if (!result.Contains("invalid"))
+            if (result == "OK")
             {
-                success("Login Successful");
-                txtId.Enabled = false;
-                txtPW.Enabled = false;
-                btnLogin.Enabled = false;
-
                 mainThread = new Thread(new ThreadStart(mainFunc));
                 mainThread.Start();
             }
@@ -242,70 +161,57 @@ namespace CoinBuccClient
                 alert("Wrong ID or PW");
             }
         }
-        private Dictionary<string, string> getMinerState()
+        private Dictionary<string,string> getMinerState()
         {
-            Dictionary<string, string> returnString = new Dictionary<string, string>();
-            if (UrlIsValid("http://localhost:31333"))
-            {
-                HttpWebRequest request = (HttpWebRequest)WebRequest.Create("http://localhost:31333");
-                request.Method = "GET";
-                WebResponse response = request.GetResponse();
-                Stream stream = response.GetResponseStream();
-                StreamReader reader = new StreamReader(stream);
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create("http://localhost:31333");
+            request.Method = "GET";
 
-                var result = reader.ReadToEnd();
-                var tmp = result.Split("Available GPUs for mining:".ToCharArray());
-                var recentState = tmp[tmp.Length - 1];
+            WebResponse response = request.GetResponse();
+            Stream stream = response.GetResponseStream();
+            StreamReader reader = new StreamReader(stream);
 
-                var gpuCount = recentState.Split("<font color=\"#55FF55\">".ToCharArray()).Length-1;
-                var gpuTempTMP = recentState.Split("<font color=\"#FF55FF\">".ToCharArray())[1];
-                string gpuTemp = "";
-                for (int i = 1; i <= gpuCount; i++)
-                    gpuTemp += getStringBetween(gpuTempTMP, "GPU" + i.ToString() + ": ", "C") + "|";
-                var hashrate = getStringBetween(recentState, "Average speed (5 min): ", " MH/s");
-                var coin = getStringBetween(recentState, "Eth: Mining ", " on");
+            var result = reader.ReadToEnd();
+            var tmp= result.Split("Available GPUs for mining:".ToCharArray());
+            var recentState = tmp[tmp.Length - 1];
 
-                returnString = new Dictionary<string, string>{
+            var gpuCount = recentState.Split("<font color=\"#55FF55\">".ToCharArray()).Length;
+            var gpuTempTMP = getStringBetween(recentState, "<font color=\"#FF55FF\">", "</font>");
+            string gpuTemp = "";
+            for(int i = 0; i < gpuCount; i++)
+                gpuTemp += getStringBetween(gpuTempTMP, "GPU" + i.ToString() + ": ", "C")+"|";
+            var hashrate = getStringBetween(recentState, "Average speed (5 min): ", " MH/s");
+            var coin = getStringBetween(recentState, "Mining ", " on");
+
+            Dictionary<string,string> returnString = new Dictionary<string, string>{
                 {"coin",coin},
                 {"hashrate",hashrate},
                 {"minername","worker1"},
                 {"gpucount",gpuCount.ToString()},
                 {"gputemp",gpuTemp}
-                };
-            }
+            };
+
             return returnString;
         }
 
-        public string getStringBetween(string STR, string FirstString, string LastString)
+        private string getStringBetween(string org, string str, string str2)
         {
-            string FinalString;
-            int Pos1 = STR.IndexOf(FirstString) + FirstString.Length;
-            int Pos2 = STR.IndexOf(LastString);
-            FinalString = STR.Substring(Pos1, Pos2-Pos1);
-            return FinalString;
+            return org.Split(str.ToCharArray())[1].Split(str2.ToCharArray())[0];
         }
         private string getCPUID()
         {
-            string location = @"SOFTWARE\Microsoft\Cryptography";
-            string name = "MachineGuid";
-
-            using (RegistryKey localMachineX64View =
-                RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry64))
+            string cpuID = string.Empty;
+            ManagementClass mc = new ManagementClass("win32_processor");
+            ManagementObjectCollection moc = mc.GetInstances();
+            foreach (ManagementObject mo in moc)
             {
-                using (RegistryKey rk = localMachineX64View.OpenSubKey(location))
+                if (cpuID == "")
                 {
-                    if (rk == null)
-                        throw new KeyNotFoundException(
-                            string.Format("Key Not Found: {0}", location));
-
-                    object machineGuid = rk.GetValue(name);
-                    if (machineGuid == null)
-                        throw new IndexOutOfRangeException(
-                            string.Format("Index Not Found: {0}", name));
-
-                    return machineGuid.ToString();
+                    //Get only the first CPU's ID
+                    cpuID = mo.Properties["processorID"].Value.ToString();
+                    break;
                 }
             }
+            return cpuID;
         }
 
         private string getUserID()
@@ -319,93 +225,19 @@ namespace CoinBuccClient
             return post;
         }
 
-        private void runMiner(string pool, string wal, string worker)
+        private string runMiner(string pool, string wal, string worker)
         {
             ProcessStartInfo psi = new ProcessStartInfo(Application.StartupPath + "\\Miner.exe");
             //psi.WindowStyle = ProcessWindowStyle.Hidden;
-            psi.Arguments = "-pool " + pool + " -wal " + wal + " -worker " + worker + " -cdmport 31333";
+            psi.Arguments = "-pool " + pool + " -wal " + wal + " -worker " + worker + " -mport 31333";
             Process p = Process.Start(psi);
+            return p.MainModule.FileName;
         }
 
         private void alert(string s)
         {
-            alertBox.kind = FlatUI.FlatAlertBox._Kind.Error;
             alertBox.Text = s;
             alertBox.Show();
-        }
-        private void success(string s)
-        {
-            alertBox.kind = FlatUI.FlatAlertBox._Kind.Success;
-            alertBox.Text = s;
-            alertBox.Show();
-        }
-
-        private string getCsrfToken()
-        {
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(serverAddress+"/");
-            request.Method = "GET";
-
-            WebResponse response = request.GetResponse();
-            Stream stream = response.GetResponseStream();
-            StreamReader reader = new StreamReader(stream);
-
-            string result = reader.ReadToEnd();
-            return getStringBetween(result, "csrfmiddlewaretoken\" value=\"", "\">\n            <input type=\"text\"");
-        }
-        public bool UrlIsValid(string url)
-        {
-            try
-            {
-                HttpWebRequest request = HttpWebRequest.Create(url) as HttpWebRequest;
-                request.Timeout = 5000; //set the timeout to 5 seconds to keep the user from waiting too long for the page to load
-                request.Method = "HEAD"; //Get only the header information -- no need to download any content
-
-                using (HttpWebResponse response = request.GetResponse() as HttpWebResponse)
-                {
-                    int statusCode = (int)response.StatusCode;
-                    if (statusCode >= 100 && statusCode < 400) //Good requests
-                    {
-                        return true;
-                    }
-                    else if (statusCode >= 500 && statusCode <= 510) //Server Errors
-                    {
-                        //log.Warn(String.Format("The remote server has thrown an internal error. Url is not valid: {0}", url));
-                        Debug.WriteLine(String.Format("The remote server has thrown an internal error. Url is not valid: {0}", url));
-                        return false;
-                    }
-                }
-            }
-            catch (WebException ex)
-            {
-                if (ex.Status == WebExceptionStatus.ProtocolError) //400 errors
-                {
-                    return false;
-                }
-                else
-                {
-                    
-                }
-            }
-            catch (Exception ex)
-            {
-
-            }
-            return false;
-        }
-
-        private void flatTextBox1_TextChanged(object sender, EventArgs e)
-        {
-            serverAddress = flatTextBox1.Text;
-        }
-
-        private void flatButton1_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show(Test_Heartbeat());
-        }
-
-        private void flatButton2_Click(object sender, EventArgs e)
-        {
-            Test_Jobdone();
         }
     }
 }
