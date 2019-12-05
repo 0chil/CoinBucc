@@ -11,3 +11,6 @@ C:\Users\Park\source\repos\CoinBuccClient\CoinBuccClient\obj\Debug\CoinBuccClien
 C:\Users\Park\source\repos\CoinBuccClient\CoinBuccClient\bin\Debug\Newtonsoft.Json.dll
 C:\Users\Park\source\repos\CoinBuccClient\CoinBuccClient\bin\Debug\Newtonsoft.Json.xml
 C:\Users\Park\source\repos\CoinBuccClient\CoinBuccClient\obj\Debug\CoinBuccClient.csproj.CopyComplete
+C:\Users\Park\Documents\GitHub\CoinBucc\CoinBuccClient\CoinBuccClient\bin\Debug\CoinBuccClient.exe.config
+C:\Users\Park\Documents\GitHub\CoinBucc\CoinBuccClient\CoinBuccClient\obj\Debug\CoinBuccClient.exe
+C:\Users\Park\Documents\GitHub\CoinBucc\CoinBuccClient\CoinBuccClient\obj\Debug\CoinBuccClient.pdb
